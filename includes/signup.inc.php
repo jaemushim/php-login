@@ -1,6 +1,5 @@
 <?php
 if (isset($_POST['signup-submit'])){
-    echo ("hi");
 
     $userID = $_POST['uid'];
     $email = $_POST['mail'];
@@ -46,7 +45,6 @@ if (isset($_POST['signup-submit'])){
         $stmt->bindParam(':uidUsers',  $userID);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo count($result);
 
         if(count($result) > 0){
             header("Location:../signup.php?error=usertaken&mail=".$email);
@@ -54,7 +52,8 @@ if (isset($_POST['signup-submit'])){
         }
         else{
             try{
-                $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
+                $inputPwd = $_POST["pwd"];
+                $hashedPwd = password_hash($inputPwd, PASSWORD_DEFAULT);
 
             $sql = "INSERT INTO users (uidUsers, emailUsers, pwdUsers) VALUES (:uidUsers,:emailUsers,:pwdUsers)";
             $stmt = $conn->prepare($sql);
@@ -62,7 +61,7 @@ if (isset($_POST['signup-submit'])){
             $stmt->bindParam(':emailUsers',  $email);
             $stmt->bindParam(':pwdUsers',  $hashedPwd);
             $stmt->execute();
-            header("Location:../signup.php?signup=success");
+            header("Location:../signup.php?signupSuccess");
             exit();
             }
             catch(PDOException $e) {
