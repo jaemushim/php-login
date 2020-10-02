@@ -8,10 +8,32 @@ require "header.php";
         <?php  
             if(isset($_GET['signupSuccess'])){
             echo '
-                <h3 class="text-center">Success ! Please Login !</h3>
+                <h3 class="text-center"><span class="text-success h3">Success !</span> Please Login !</h3>
             ';
             }
             else{
+                if (isset($_GET['error'])){
+                    if($_GET['error'] == "emptyfields"){
+                    echo '<h3 class="text-danger">Fill in all fields!</h3>';
+                    }
+                    else if($_GET['error'] == "invaliduidmail"){
+                        echo '<h3 class="text-danger">Invalid username and e-mail!</h3>';
+                    }
+                    else if($_GET['error'] == "invalidmail"){
+                        echo '<h3 class="text-danger">Invalid e-mail!</h3>';
+                    }
+                    else if($_GET['error'] == "invaliduid"){
+                        echo '<h3 class="text-danger">Invalid username!</h3>';
+                    }
+                    else if($_GET['error'] == "passwordcheck"){
+                    echo '<h3 class="text-danger">Your passwords do not match!</h3>';
+                    }
+                    else if($_GET['error'] == "usertaken"){
+                    echo '<h3 class="text-danger">Username is already taken!</h3>';
+                    }
+                }
+                
+
                 echo '
                 <h1 class="mb-4">Sign up</h1>
                 <form action="includes/signup.inc.php" method="post">

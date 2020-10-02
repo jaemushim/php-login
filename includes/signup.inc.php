@@ -7,7 +7,7 @@ if (isset($_POST['signup-submit'])){
     $passwordRepeat = $_POST['pwd-repeat'];
 
     if(empty($userID) || empty($email) || empty($password) || empty($passwordRepeat)) {
-        header("Location:../signup.php?error=emptytfiedlds&uid=".$userID."mail=".$email);
+        header("Location:../signup.php?error=emptyfields&uid=".$userID."&mail=".$email);
         exit();
     }
     else if (!filter_var($email,FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z0-9]*$/", $userID)){
@@ -20,11 +20,11 @@ if (isset($_POST['signup-submit'])){
         exit();
     }
     else if (!preg_match("/^[a-zA-Z0-9]*$/", $userID)){
-        header("Location:../signup.php?error=invalidmail&uid=".$email);
+        header("Location:../signup.php?error=invaliduid&uid=".$email);
         exit();
     }
     else if ($password !== $passwordRepeat){
-        header("Location:../signup.php?error=passwordcheck&uid=".$userID."mail=".$email);
+        header("Location:../signup.php?error=passwordcheck&uid=".$userID."&mail=".$email);
         exit();
     }    
     else{

@@ -8,12 +8,12 @@ require "header.php";
         <?php
             if(isset($_SESSION['userId'])){
             echo '
-                <h3 class="text-center">You are logged in!</h3>
+                <h3 class="text-center text-success">You are logged in!</h3>
             ';
             }
             else{
             echo '
-                <h3 class="text-center">SIGNUP 버튼을 클릭하여 회원가입하세요.</h3>
+                <h3 class="text-center">\'SIGNUP\' 버튼을 클릭하여 회원가입하세요.</h3>
             ';
             }
         ?>
